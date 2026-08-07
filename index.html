@@ -115,60 +115,6 @@
             overflow: hidden;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .about-content,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-logo img {
-                height: 60px;
-            }
-
-            .nav-toggle {
-                display: flex;
-            }
-
-            .nav-spacer {
-                display: none;
-            }
-
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                flex-direction: column;
-                gap: 0;
-                background: rgba(10, 10, 10, 0.97);
-                border-bottom: 1px solid rgba(74, 144, 226, 0.3);
-                font-size: 0.9rem;
-            }
-
-            .nav-menu.open {
-                display: flex;
-            }
-
-            .nav-menu li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-menu a {
-                display: block;
-                padding: 1rem;
-            }
-        }
-        
         .hero-slideshow {
             position: absolute;
             top: 0;
@@ -554,6 +500,60 @@
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-logo img {
+                height: 60px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-spacer {
+                display: none;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(10, 10, 10, 0.97);
+                border-bottom: 1px solid rgba(74, 144, 226, 0.3);
+                font-size: 0.9rem;
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 1rem;
+            }
         }
     </style>
 </head>

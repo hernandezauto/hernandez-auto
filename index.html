@@ -82,6 +82,27 @@
             color: var(--primary-blue);
         }
 
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--light-text);
+            border-radius: 2px;
+        }
+
         .hero {
             height: 100vh;
             display: flex;
@@ -108,9 +129,43 @@
                 grid-template-columns: 1fr;
             }
 
+            .nav-logo img {
+                height: 60px;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-spacer {
+                display: none;
+            }
+
             .nav-menu {
-                gap: 1rem;
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                background: rgba(10, 10, 10, 0.97);
+                border-bottom: 1px solid rgba(74, 144, 226, 0.3);
                 font-size: 0.9rem;
+            }
+
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 1rem;
             }
         }
         
@@ -506,10 +561,14 @@
 
     <nav>
         <div class="nav-logo">
-            <!-- FIX: Standardized to lowercase "images/" folder -->
-            <img src="images/HernandezAutoDetailingLogoHorizontal.PNG" alt="Hernandez Auto Detailing Logo">
+            <img src="images/HernandezAutoDetailingLogoHorizontal.png" alt="Hernandez Auto Detailing Logo">
         </div>
-        <ul class="nav-menu">
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu" id="nav-menu">
             <li><a href="#home">Home</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#pricing">Pricing</a></li>
@@ -523,20 +582,19 @@
 
     <section id="home" class="hero">
         <div class="hero-slideshow">
-            <!-- FIX: All paths standardized to lowercase "images/" -->
-            <div class="hero-slide active" style="background-image: url('images/HernandezAutoDetailing_Cadillac.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_BMW.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Lexus_interior.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Dodge_Challenger.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior3.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Tires1.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Cadillac2.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailingTruck1.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior4.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior1.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutDetailing_Civic.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernandezAutDetailing_Civic_Interior.JPEG');"></div>
-            <div class="hero-slide" style="background-image: url('images/HernadezAutoDetailing_Interior2.JPEG');"></div>
+            <div class="hero-slide active" style="background-image: url('images/HernandezAutoDetailing_Cadillac.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_BMW.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Lexus_interior.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Dodge_Challenger.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior3.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Tires1.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Cadillac2.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailingTruck1.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior4.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior1.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Civic.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Civic_Interior.jpeg');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior2.jpeg');"></div>
         </div>
         <div class="hero-content">
             <h1>Premium Auto Detailing in Beloit, WI</h1>
@@ -810,6 +868,14 @@
             });
         });
 
+        // Mobile nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        navToggle.addEventListener('click', () => {
+            const isOpen = navMenu.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
         // Smooth scrolling for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -818,6 +884,8 @@
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
+                navMenu.classList.remove('open');
+                navToggle.setAttribute('aria-expanded', 'false');
             });
         });
     </script>

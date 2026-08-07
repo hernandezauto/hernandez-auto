@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional auto detailing in Beloit, WI. Interior & exterior detailing, paint correction, ceramic coating, upholstery extraction. Quality service starting at $60. Shop and mobile services available.">
+    <meta name="keywords" content="auto detailing Beloit WI, car detailing Beloit, ceramic coating Beloit, paint correction Beloit, mobile detailing Beloit, interior detailing, exterior detailing">
+    <meta name="author" content="Hernandez Auto Detailing">
+    <title>Hernandez Auto Detailing | Professional Car Detailing in Beloit, WI</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-blue: #4A90E2;
+            --dark-bg: #0a0a0a;
+            --light-text: #ffffff;
+            --accent-blue: #64B5F6;
+            --gray-text: #d4d4d4;
+            --body-text: #c9c9c9;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--light-text);
+            background-color: var(--dark-bg);
+            padding-top: 80px;
+        }
+        
+        nav {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 0.5rem 1.5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 90px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-spacer {
+            flex: 1;
+        }
+
+        .nav-menu {
+            flex: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-blue);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 144, 226, 0.24);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s ease;
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1.4s ease;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.5);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--light-text);
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--light-text);
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: rgba(26, 26, 46, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 40px rgba(74, 144, 226, 0.3);
+        }
+        
+        .service-card h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .service-card p {
+            color: var(--body-text);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .pricing-card {
+            background: rgba(26, 26, 46, 0.6);
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(74, 144, 226, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--primary-blue);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card h3 {
+            color: var(--accent-blue);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-card .price-tag {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            color: var(--body-text);
+            text-align: left;
+        }
+        
+        .pricing-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
+        }
+        
+        .pricing-card li:before {
+            content: "✓ ";
+            color: var(--primary-blue);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            color: var(--body-text);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .qualities {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        
+        .qualities li {
+            padding: 0.8rem 0;
+            color: var(--body-text);
+            font-size: 1.1rem;
+        }
+        
+        .qualities li:before {
+            content: "⭐ ";
+            margin-right: 0.5rem;
+        }
+        
+        .instagram-cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .instagram-cta a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .instagram-cta a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: rgba(26, 26, 46, 0.6);
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: rgba(74, 144, 226, 0.1);
+        }
+        
+        .faq-question h3 {
+            color: var(--light-text);
+            font-size: 1.2rem;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            color: var(--body-text);
+            line-height: 1.8;
+            display: none;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-info {
+            background: rgba(26, 26, 46, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+        }
+        
+        .contact-info h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item h4 {
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-item p, .contact-item a {
+            color: var(--body-text);
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .contact-form {
+            background: rgba(26, 26, 46, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            border-radius: 8px;
+            background: rgba(10, 10, 10, 0.5);
+            color: var(--light-text);
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 3rem 2rem 1rem;
+            border-top: 1px solid rgba(74, 144, 226, 0.3);
+            text-align: center;
+        }
+        
+        .copyright {
+            color: var(--gray-text);
+            padding-top: 2rem;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <!-- FIX: Standardized to lowercase "images/" folder -->
+            <img src="images/HernandezAutoDetailingLogoHorizontal.PNG" alt="Hernandez Auto Detailing Logo">
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-spacer"></div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-slideshow">
+            <!-- FIX: All paths standardized to lowercase "images/" -->
+            <div class="hero-slide active" style="background-image: url('images/HernandezAutoDetailing_Cadillac.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_BMW.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Lexus_interior.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Dodge_Challenger.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior3.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Tires1.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Cadillac2.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailingTruck1.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior4.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutoDetailing_Interior1.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutDetailing_Civic.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernandezAutDetailing_Civic_Interior.JPEG');"></div>
+            <div class="hero-slide" style="background-image: url('images/HernadezAutoDetailing_Interior2.JPEG');"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Premium Auto Detailing in Beloit, WI</h1>
+            <p>Professional Interior &amp; Exterior Detailing | Quality You Can Trust</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Book Your Appointment Today</a>
+                <!-- FIX: Phone number unified — confirm correct number with owner -->
+                <a href="tel:+16083220970" class="btn btn-secondary">Call Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Our Detailing Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Exterior Detailing</h3>
+                <p>Complete exterior wash and wax, paint decontamination, tire and wheel cleaning, trim restoration, and protective sealant application for a showroom shine that turns heads.</p>
+            </div>
+            <div class="service-card">
+                <h3>Interior Detailing</h3>
+                <p>Deep vacuum, dashboard and console cleaning, door panel detailing, leather conditioning, and thorough sanitization for a fresh, clean interior you'll love.</p>
+            </div>
+            <div class="service-card">
+                <h3>Paint Correction</h3>
+                <p>Professional multi-stage polishing to remove swirl marks, scratches, and oxidation, restoring your vehicle's paint to like-new condition with incredible depth and clarity.</p>
+            </div>
+            <div class="service-card">
+                <h3>Ceramic Coating</h3>
+                <p>Long-lasting paint protection with hydrophobic properties. Guards against UV rays, chemicals, and environmental contaminants for years of protection and easy maintenance.</p>
+            </div>
+            <div class="service-card">
+                <h3>Upholstery Extraction</h3>
+                <p>Deep cleaning extraction for fabric seats and carpets. Removes embedded dirt, tough stains, and odors using professional-grade equipment and cleaning solutions.</p>
+            </div>
+            <div class="service-card">
+                <h3>Mobile Detailing</h3>
+                <p>We bring our professional detailing services to your location in Beloit and surrounding areas. Convenience without compromising quality or results.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <h2>Transparent Pricing</h2>
+        <p style="text-align: center; color: var(--body-text); margin-bottom: 2rem;">Complete interior and exterior detailing packages tailored to your vehicle</p>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Small Vehicles</h3>
+                <div class="price-tag">$60+</div>
+                <ul>
+                    <li>Sedans &amp; Compact Cars</li>
+                    <li>Full Interior Detailing</li>
+                    <li>Full Exterior Detailing</li>
+                    <li>Vacuum &amp; Wipe Down</li>
+                    <li>Tire Shine</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <h3>Medium Vehicles</h3>
+                <div class="price-tag">$80+</div>
+                <ul>
+                    <li>Mid-Size SUVs &amp; Trucks</li>
+                    <li>Full Interior Detailing</li>
+                    <li>Full Exterior Detailing</li>
+                    <li>Vacuum &amp; Wipe Down</li>
+                    <li>Tire Shine</li>
+                </ul>
+            </div>
+            <div class="pricing-card">
+                <h3>Large Vehicles</h3>
+                <div class="price-tag">$100+</div>
+                <ul>
+                    <li>Full-Size SUVs &amp; Trucks</li>
+                    <li>Full Interior Detailing</li>
+                    <li>Full Exterior Detailing</li>
+                    <li>Vacuum &amp; Wipe Down</li>
+                    <li>Tire Shine</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; color: var(--body-text); margin-top: 2rem;">*Pricing may vary based on vehicle condition. Contact us for a custom quote on specialty services like ceramic coating and paint correction.</p>
+    </section>
+
+    <section id="about">
+        <h2>About Hernandez Auto Detailing</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Your Trusted Auto Detailing Experts in Beloit, WI</h3>
+                <p>At Hernandez Auto Detailing, we treat every vehicle with the care and attention it deserves. Whether you drive a compact car, luxury sedan, truck, or SUV, our team is dedicated to delivering exceptional results that exceed your expectations every time.</p>
+                <p>Located in Beloit, Wisconsin, we serve the local community with reliable, professional auto detailing services. From basic wash and wax to advanced paint correction and ceramic coating, we have the expertise and professional-grade equipment to handle any detailing job with precision.</p>
+                <ul class="qualities">
+                    <li>Trustworthy &amp; Reliable Service</li>
+                    <li>Quality Workmanship Guaranteed</li>
+                    <li>Attention to Every Detail</li>
+                    <li>All Vehicle Types Welcome</li>
+                    <li>Shop &amp; Mobile Services Available</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <div class="service-card">
+                    <h3>Why Choose Us?</h3>
+                    <p>We're passionate about making your vehicle look its best. Our commitment to quality and customer satisfaction has made us a trusted name in Beloit auto detailing.</p>
+                </div>
+                <div class="service-card" style="margin-top: 2rem;">
+                    <h3>Location &amp; Hours</h3>
+                    <p><strong>📍 Location:</strong><br>Beloit, Wisconsin 53511<br>Serving Beloit and surrounding areas</p>
+                    <p style="margin-top: 1rem;"><strong>🕒 Hours:</strong><br>By Appointment - Contact us to schedule</p>
+                    <!-- FIX: Phone number unified — confirm correct number with owner -->
+                    <p style="margin-top: 1rem;"><strong>📞 Phone:</strong><br>
+                        <a href="tel:+16083220970" style="color: var(--accent-blue); text-decoration: none;">(608) 322-0970</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Our Work</h2>
+        <p style="text-align: center; color: var(--body-text); margin-bottom: 2rem;">See the quality that sets us apart</p>
+        
+        <!--
+            ELFSIGHT INSTAGRAM WIDGET
+            If the feed stopped working, log in at elfsight.com and reconnect
+            your Instagram account to the widget. The embed code below is correct —
+            the issue is almost always an expired Instagram connection inside Elfsight.
+        -->
+        <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+        <div class="elfsight-app-2e9d26b3-0756-4b9c-b453-729264ec1f05" data-elfsight-app-lazy></div>
+        
+        <div class="instagram-cta">
+            <a href="https://www.instagram.com/hernandez_auto__detailing" target="_blank" rel="noopener">
+                Follow us on Instagram @hernandez_auto__detailing →
+            </a>
+        </div>
+    </section>
+
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How long does a full detail take?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    A complete interior and exterior detail typically takes 2-4 hours depending on the vehicle size and condition. We'll give you an estimated timeframe when you book your appointment so you can plan accordingly.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do you offer mobile detailing services?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! While we primarily operate from our shop in Beloit, we offer mobile detailing services within the local area for your convenience. Contact us to confirm availability for your location.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>What's included in your interior detailing?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Our interior detailing includes thorough vacuuming of all surfaces, dashboard and console cleaning, door panel detailing, window cleaning, upholstery cleaning or leather conditioning, and complete interior sanitization. We can also add upholstery extraction for deep cleaning when needed.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>How often should I get my car detailed?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We recommend a full detail every 3-6 months to maintain your vehicle's appearance and protect its value. Regular detailing helps prevent long-term damage from dirt, UV rays, and environmental contaminants.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Do you detail all types of vehicles?</h3>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely! We work on all vehicle types - from compact cars to full-size trucks and SUVs, luxury vehicles, and everything in between. No job is too big or small for our team.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Book Your Appointment</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <!-- FIX: Phone number unified — confirm correct number with owner -->
+                <div class="contact-item">
+                    <h4>📞 Phone</h4>
+                    <p><a href="tel:+16083220970">(608) 322-0970</a></p>
+                </div>
+                <div class="contact-item">
+                    <h4>📧 Email</h4>
+                    <p><a href="mailto:d.hernandez3551@gmail.com">d.hernandez3551@gmail.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <h4>📍 Location</h4>
+                    <p>Beloit, Wisconsin 53511<br>Serving Beloit &amp; surrounding areas</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Request a Quote</h3>
+                <!--
+                    FORMSPREE SETUP
+                    For this form to email the owner, you must:
+                    1. Go to formspree.io and sign in (or create a free account)
+                    2. Find the form with ID "mzzoonnk" or create a new one
+                    3. Set the recipient email to the owner's address
+                    4. Confirm the email verification Formspree sends you
+                    The action URL below is correct once that setup is done.
+                -->
+                <form action="https://formspree.io/f/mzzoonnk" method="POST">
+                    <div class="form-group">
+                        <label>Name *</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone *</label>
+                        <input type="tel" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" placeholder="Tell us about your vehicle and service needs..."></textarea>
+                    </div>
+                    <button class="btn btn-primary" type="submit" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="copyright">
+            <!-- FIX: Updated copyright year -->
+            <p>&copy; 2025 Hernandez Auto Detailing. All rights reserved. | Beloit, Wisconsin</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hero slideshow — rotates every 3.4 seconds
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        setInterval(nextSlide, 3400);
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isVisible = answer.style.display === 'block';
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    a.style.display = 'none';
+                });
+                answer.style.display = isVisible ? 'none' : 'block';
+            });
+        });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
